@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" initial-scale="1.0">
+    <link rel="stylesheet" href="pajareria.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>Cidudades y sus puntos de interes</header>
+    <div id="container">
+        <div>
+            <div id="newItem">
+                <label for="id" v-if="edit">ID:</label><br>
+                <input type="text" id="id" name="id" v-model="Id" v-if="edit"><br>
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" v-model="Name"><br>
+                <label for="description">Description:</label><br>
+                <input type="text" id="description" name="description" v-model="Description"><br>
+                <button v-on:click="redirectAction">Save Item</button>
+                <button v-bind:class="{inactive: !edit}" v-on:click="clear">Cancelar Edicion</button>
+            </div>
+        </div>
+        <div>
+            <template v-if="hasItems">
+                <ul id="listOfItems">
+                    <li v-for="item of items">
+                        {{ item }}
+                        <button v-on:click="fillInputs(item.Id,item.Name,item.Description)">Update</button>
+                        <button v-on:click="deleteItem(item.Id)">Delete</button>
+                    </li>
+                </ul>
+            </template>
+            <template v-else>
+                <p>The items will be appear here.</p>    
+            </template>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js "></script>
+<script src="script/ItemService.js "></script>
+
+</html>
